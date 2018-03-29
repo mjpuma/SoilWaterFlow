@@ -1,2 +1,2 @@
 # SoilWaterFlow
-One dimensional, block-centered finite difference code to solve unsaturated flow equation with soil-water loss due to transpiration and evaporation 
+Block-centered finite difference code to solve (one-dimensional) unsaturated flow equation with soil-water loss due to transpiration and evaporation.  Includes fortran codes, many developed originally by Michael A Celia (Princeton University), and extended by Andrew Guswa (Smith College) and Michael J. Puma (Columbia University).  Pre- and post- processing scripts are in matlab scripts.
