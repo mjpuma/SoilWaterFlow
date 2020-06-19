@@ -7,36 +7,36 @@ clear;
 
 % Input parameters
 %
-etmax(1) = 0.475;%0.61; %	% maximum daily evapotranspiration over 
-                            % entire root zone [cm/day]
-etwilt(1) = 0.0456; %0.0572 %  evaporation rate 
-                            % at the wilting point
+etmax(1) = 0.476;	% maximum daily ET over entire root zone [cm/day]
+etwilt(1) = 0.013;  % max. evaporation rate (starts at wilting)
+                            % [cm/day]
+shygr(1) = 0.14;            % hygroscopic saturation 
+swilt(1) = 0.28;    % wilting point saturation 
+sstar(1) = 0.46;    % saturation at stomata closure 
+sfc(1) = 0.56;              % saturation at field capacity 
 
-shygr(1) = 0.02;        % hygroscopic saturation 
-swilt(1) = 0.06;  %0.052;       %  wilting point saturation 
-sstar(1) =  0.105; %0.152;       % saturation at stomata closure 
-sfc(1) = 0.29;          % saturation at field capacity 
+expn(1) = 4.9;%1/0.378;  % constant b in Campbell model (data from Clapp & 
+                    % Hornberger (1978)) or 1/lambda in Brooks and 
+                    % Corey model (1964) data from Handbook of Hydrology
+rksat(1) = 82.2;    % saturated hydraulic conductivity [cm/day]
+poros(1) = 0.43;	% porosity or saturated moisture content
 
-expn(1) = 2.25;     % exponent b in Clapp and Hornberger formulation
-rksat(1) = 109.8;   % saturated hydraulic conductivity
-poros(1) = 0.42;	% saturated moisture content (i.e. porosity)
-
-init2 = 0.10;	    % initial saturation or head if iccode==1
-zroot = 100.0;      % depth of root zone (need not be an integer 
-                    % # of blocks)
+init2 = 0.35;	        % initial saturation or head if iccode==1
+zroot = 40.0;%      % depth of root zone (need not be an integer 
+                        % # of blocks)
 
 tday = 1;           % length of a day in units consistent w/ 
                     % temporal discretization
-tmax = 550;         % maximum simulation time
-ntmax = 20000000;	% maximum number of time steps allowed
+tmax = 660;		% maximum simulation time
+ntmax = 20000000*4;	% maximum number of time steps allowed
 dtmax = 2e-03;      % maximum time step size
 
 % Top Boundary Conditions
 %
-lambda = 0.167;	    oldlambda=lambda; % number of storms per day
-meandepth = 1.5;	% mean storm depth (exponential) [L]
+lambda = 0.28;	    oldlambda=lambda; % number of storms per day
+meandepth = 1.742;	% mean storm depth (exponential) [L]
 lengthcm = 1.0;     % length of a centimeter in units consistent with L
-Delta = 0.2;  %0.1;% interception [L] 0.1 for grass and 0.2 for tree
+Delta = 0.1;  % % interception [L] 0.1 for grass and 0.2 for tree
 lambda = lambda*exp(-Delta/meandepth);  % modify lambda to account 
                                         % for interception
 
@@ -56,7 +56,7 @@ end
 % Number of storms, which produce throughfall, that occur
 nstorm = size(ntstart,1)-1;
 
-% Create vector of storm depths and subtract vegetation interceoption
+% Create vector of storm depths and subtract vegetation interception
 olddepth = randexp(meandepth,2*nstorm,1);
 j=1;
 for i = 1:nstorm
@@ -69,26 +69,24 @@ for i = 1:nstorm
     i=i+1; j= j+1;
 end
 
-% Compute actual lambda and mean throughfall-producing storm 
-% depth (after subtracting interception)
 actlambda = nstorm/tmax;
 actmeandepth = mean(depth);
 
 % Storm Duration
 %
 % Case 1: From a Uniform Distribution
-mind = 0.05;     % minimum storm duration [days]
-maxd = 0.15;	 % maximum storm duration [days]
-dur = round((rand(nstorm,1)*(maxd-mind)+mind)/dtmax);
-dur(dur==0)=1;
+%mind = 0.05;     % minimum storm duration [days]
+%maxd = 0.15;	 % maximum storm duration [days]
+%dur = round((rand(nstorm,1)*(maxd-mind)+mind)/dtmax);
+%dur(dur==0)=1;
 %
 % Case 2: From a Beta Distribution
-%mind = 0.3/24;       % minimum storm duration [days]
-%maxd = 6/24;    % maximum storm duration [days]
-%Abd = 2;          % shape of pdf
-%Bbd = 4.67;       % based on mean storm duration of 1.5 hours
-%dur = round((betarnd(Abd,Bbd,[nstorm 1])*(maxd-mind)+mind)/dtmax);
-%dur(dur==0)=1;
+mind = 0.3/24;       % minimum storm duration [days]
+maxd = 6/24;    % maximum storm duration [days]
+Abd = 2;          % shape of pdf
+Bbd = 4.67;       % based on mean storm duration of 1.5 hours
+dur = round((betarnd(Abd,Bbd,[nstorm 1])*(maxd-mind)+mind)/dtmax);
+dur(dur==0)=1;
 
 % Prepare SoilBox input
 %
@@ -134,7 +132,7 @@ save rainpar.in rainpar -ascii
 %
 infile = 'plant1d.in';
 %
-titlename = 'Eragrostis pallens- 1,000 Day - 02/04';%'Burkea Africana ';
+titlename = 'Prosopis glandulosa - 660 days 05/04';%'Paspalum setaceum';
 geofile = 'geometry.in';
 controlfile = 'control.in';
 matfile = 'material.in';
@@ -146,7 +144,8 @@ bcfile = 'bc.in';
 nblocks = 200;	% number of blocks in soil column
 ztop = 0.0;		% depth of top boundary
 zevap = 20.0;   % depth of zone of evaporation
-%zroot          % See POINT MODEL INPUT 
+zroot = 40.0;%      % depth of root zone (need not be an integer 
+                        % # of blocks)
 ngrid = 1;      % if ngrid==1 then dz is quasi-constant
 dzconst = 1.0;  % block size
 nnotdz = 0;     % number of blocks not dz in size
@@ -154,10 +153,10 @@ nnotdz = 0;     % number of blocks not dz in size
 % The distribution of root weights is assigned according  
 % to a beta distribution with parameters Ar and Br
 nrweight = 0;  % nrweight=1 implies uniform weighting
-Ar = 2.7; %1.3; %
-Br = 1.1;  %4.0; %
+Ar = 1.1;    
+Br = 2.7;    
 [rweight,rcdfcheck] = betaweight(zroot,dzconst,Ar,Br);
-rweight=rweight/rcdfcheck;
+rweight=rweight/rcdfcheck
 % The distribution of evap weights is assigned according 
 % to a beta distribution with parameters Ae and Be
 neweight = 0;   %neweight==1 implies uniform weighting
@@ -169,9 +168,10 @@ eweight=eweight/ecdfcheck;
 %
 tstart = 0;		% starting time for the simulation
 dt = 0.001;		% initial time step size
-%tmax           See POINT MODEL INPUT	
-%ntmax          See POINT MODEL INPUT	
-%tday           See POINT MODEL INPUT 
+tmax = 660;		% maximum simulation time
+ntmax = 20000000*4;	% maximum number of time steps allowed	
+tday = 1;           % length of a day in units consistent w/ 
+                    % temporal discretization 
 
 etstart = .29;  % start time for evapotranspiration (within a day)
 etfin = .79;    % end time for evapotranspiration (within a day)
@@ -193,8 +193,8 @@ itmin = 5;		% in iterations are < itmin, time step is modified
 itmax = 11;		% if iterations are > itmax, time step is modified
 dtredu = 0.5;	% reduction factor for time step
 dtincr = 2.8;	% magnification factor for time step
-dtmin = 1e-07;  %minimum time step size
-%dtmax          See POINT MODEL INPUT
+dtmin = 1e-07;  % minimum time step size
+dtmax = 2e-03;  % maximum time step size
 
 errpr = 1e-05;	% error tolerance on pressure head
 errres = 1e-06; % error tolerance on the residual
@@ -205,23 +205,29 @@ errres = 1e-06; % error tolerance on the residual
 nmatl = 1;      % number of different materials (only 1 allowed)
 jj(1) = 1;
 
-%poros(1)           See POINT MODEL INPUT 
-%expn(1)            See POINT MODEL INPUT  
-%rksat(1)           See POINT MODEL INPUT  
-alpha(1) = 3.0;     % entry pressure head for Pc-S curve
+poros(1) = 0.43;	% porosity or saturated moisture content 
+expn(1) = 4.9;%1/0.378;  % constant b in Campbell model (data from Clapp & 
+                    % Hornberger (1978)) or 1/lambda in Brooks and 
+                    % Corey model (1964) data from Handbook of Hydrology  
+rksat(1) = 82.2;    % saturated hydraulic conductivity [cm/day]  
+alpha(1) = 7.18;%21.8; % entry SUCTION HEAD for Pc-S curve [cm]
+                       % value from Clapp and hornberger data within the 
+                       % range given in Handbook of Hydrology (p. 5.14)
 stor(1) = 1e-10;    % specific storativity
-sres(1) = 0.02;      % value on soil moisture at which all ET = 0
+sres(1) = shygr(1);      % value on soil moisture at which all ET = 0
 Se(1) = 0.98;       % value of saturation at ~ entry pressure head
 %
-rtavgdens(1) = 0.02;%0.20%    % root length density [cm of roots/cm^3 of soil]
-frac(1) = 0.8;      % fraction of roots at full saturation 
+rtavgdens(1) = 0.02;    % NOT RELEVANT IN CURRENT FORMULATION
+                       % root density [cm of roots/cm^3 of soil]
+frac(1) = 0.5;      % fraction of roots at full saturation 
                     % needed for Tmax
-%etmax(1)           See POINT MODEL INPUT 
-%etwilt(1)          See POINT MODEL INPUT 
-hwilt(1) =-31600;   % -39800;  % plant wilting point [cm]
-hstar(1) =-730;   % -300;    %  moisture potential at which 
+etmax(1) = 0.476;	% maximum daily ET over entire root zone [cm/day]
+etwilt(1) = 0.013;  % max. evaporation rate (starts at wilting)
+                            % [cm/day] 
+hwilt(1) = -45900;%  % plant wilting point [cm]
+hstar(1) = -920;%  % moisture potential at which 
                     % stomata begin to close [cm]
-%swilt(1)           See POINT MODEL INPUT  
+swilt(1) = 0.28;    % wilting point saturation   
 %
 nparam = 1;		% indicator of how to assign materials
 matconst = 1;   % material type to assign to the entire domain
@@ -238,7 +244,7 @@ isat = 1;	% initial value is in terms of saturation
             % if isat==1
 init1 = 0;	% number of initial values different from 
             % value if iccode==1
-%init2      See POINT MODEL INPUT
+init2 = 0.35;	        % initial saturation or head if iccode==1
  
 % Top Boundary condition  (ALSO SEE POINT MODEL INPUT)
 %
@@ -253,7 +259,7 @@ isattop = 1;	% irrelevant for flux b.c.
 %
 nbotbc = 1;	    % number of different bottom bcs
 nbcbot = 1;		% fixed condition
-bcbot = sfc;    
+bcbot = swilt(1);    % for comparison with Burkea africana simulations 
 isatbot = 1;	% 0=pressure head condition, 
                 % 1=saturation condition
 timeb = tmax;	% end time for bottom condition
@@ -374,8 +380,9 @@ fprintf(fidm,'%4d\n',nmatl);
 for i=1:nmatl   
    fprintf(fidm,'%4d %6.3e %6.3e %6.3e %6.3e %6.3e %6.3e %6.3e\n',...
       jj(i),poros(i),alpha(i),expn(i),rksat(i),stor(i),sres(i),Se(i));
-   fprintf(fidm,'%6.3e %6.3e %6.3e %6.3e %6.3e %6.3e %6.3e\n',...
-      frac(i),rtavgdens(i),etmax(i),etwilt(i),hwilt(i),hstar(i),swilt(i));
+   fprintf(fidm,'%6.3e %6.3e %6.3e %6.3e %6.3e %6.3e %6.3e %6.3e\n',...
+      frac(i),rtavgdens(i),etmax(i),etwilt(i),hwilt(i),hstar(i),swilt(i),...
+      sstar(i));
 end
 fprintf(fidm,'%1d\n',nparam);
 if nparam==1
@@ -398,15 +405,15 @@ status = fclose(fidi);
 
 %  Output for bc.in
 %
-fidb = fopen(bcfile,'w');
-fprintf(fidb,'%4d %4d\n',ntopbc,nbotbc);
-fprintf(fidb,'%1d %9.5e %1d %9.5e\n',bcout);
-fprintf(fidb,'%1d %9.5e %1d %9.5e\n',nbcbot,bcbot,isatbot,timeb);
-status = fclose(fidb);
+%fidb = fopen(bcfile,'w');
+%fprintf(fidb,'%4d %4d\n',ntopbc,nbotbc);
+%fprintf(fidb,'%1d %9.5e %1d %9.5e\n',bcout);
+%fprintf(fidb,'%1d %9.5e %1d %9.5e\n',nbcbot,bcbot,isatbot,timeb);
+%status = fclose(fidb);
 
 % Putput for climate parameters
-climate = [oldlambda lambda actlambda meandepth actmeandepth actmeandur actmeanint]
-save climate climate -ascii;
+%climate = [oldlambda lambda actlambda meandepth actmeandepth actmeandur actmeanint]
+%save climate climate -ascii;
 %----------------------------------------------------------------------
 % PLOTS OF EVAPORATION AND ROOT WEIGHTS 
 %

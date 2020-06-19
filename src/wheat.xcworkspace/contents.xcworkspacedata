@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/BCCHK.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/BCINPUT.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/CNVCHK.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/CONTROL.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/DAYAVG.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/FNCDSDP.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/FNCEVAP.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/FNCKREL.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/FNCPOR.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/FNCPR.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/FNCSAT.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/GEOMETRY.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/INITER.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/INITIAL.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/INITMVS.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/INPUT.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/ITCHK.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/MASBAL.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/MATRIX.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/PONDING.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/PPRINT.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/PPRINT2.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/PPRINT3.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/PPRINT4.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/PROPMAT.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/STRESSONE.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/THOMAS.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/TIMCHK.f">
+   </FileRef>
+   <FileRef
+      location = "group:../../GitHub_mjpuma/SoilWaterFlow/src/TRANSPIR.f">
+   </FileRef>
+   <FileRef
+      location = "container:PLANT1D.f">
+   </FileRef>
+</Workspace>

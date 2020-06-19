@@ -11,7 +11,7 @@
      +               dtprint,nbctop,nbcbot,ntmax)    
         implicit none
 !*********************************************************************
-!   Routine:  input.for                                              *
+!   Routine:  input.f                                              *
 !   Purpose:  Read input variables for block-centered plant1d        *
 !              flow code.                                            *
 !   Written:  December 2000, February 2003, Summer 2005              *

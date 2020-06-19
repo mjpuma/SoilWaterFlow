@@ -1,7 +1,7 @@
       Program plant1d
         implicit none
 !***********************************************************************
-!     Routine:  plant1d.for                                            *
+!     Routine:  plant1d.f                                            *
 !     Function: Main routine for 1-D block-centered finite difference  *
 !               code to solve unsaturated flow equation with soil-	   *
 !               water loss due to transpiration and evaporation        *
