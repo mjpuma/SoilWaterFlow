@@ -1,0 +1,1 @@
+gfortran -o output bcchk.f bcinput.f cnvchk.f control.f dayavg.f fncdsdp.f fncevap.f fnckrel.f fncpor.f fncpr.f fncsat.f geometry.f initer.f initial.f initmvs.f input.f itchk.f masbal.f Matrix.f plant1d.f ponding.f pprint.f pprint2.f pprint3.f propmat.f stressone.f thomas.f timchk.f transpir.f 
