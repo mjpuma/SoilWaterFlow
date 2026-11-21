@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "soilwaterflow"
+version = "0.1.0"
+description = "One-dimensional Richards-equation soil water model with multi-variety root water uptake (Python port of the PLANT1D Fortran code)"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+dependencies = ["numpy", "numba"]
+
+[project.optional-dependencies]
+test = ["pytest"]
+examples = ["matplotlib"]
+
+[project.scripts]
+soilwaterflow = "soilwaterflow.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/mjpuma/SoilWaterFlow"
+
+[tool.setuptools.packages.find]
+where = ["src"]

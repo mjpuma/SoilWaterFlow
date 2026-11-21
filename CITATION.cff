@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "soilwaterflow: one-dimensional Richards-equation soil water model with multi-variety root water uptake"
+version: 0.1.0
+date-released: 2026-11-21
+license: MIT
+authors:
+  - family-names: Puma
+    given-names: Michael J.
+    affiliation: "Center for Climate Systems Research, Columbia University"
+  - family-names: Guswa
+    given-names: Andrew J.
+    affiliation: "Smith College"
+  - family-names: Celia
+    given-names: Michael A.
+    affiliation: "Princeton University"
+references:
+  - type: article
+    authors:
+      - family-names: Puma
+        given-names: Michael J.
+      - family-names: Rodriguez-Iturbe
+        given-names: Ignacio
+      - family-names: Celia
+        given-names: Michael A.
+      - family-names: Guswa
+        given-names: Andrew J.
+    title: "Implications of rainfall temporal resolution for soil-moisture and transpiration modeling"
+    journal: "Transport in Porous Media"
+    volume: 68
+    start: 37
+    end: 67
+    year: 2007

@@ -1,0 +1,38 @@
+{
+  "_comment": "Illustrative, uncalibrated parameters. Lengths in mm, times in days.",
+  "soil": "sandy_loam_example",
+  "varieties": [
+    {
+      "name": "maize",
+      "t_max": 4.5,
+      "s_star": 0.48,
+      "s_w": 0.22,
+      "root_depth": 700,
+      "root_shape": [
+        1.0,
+        3.0
+      ]
+    },
+    {
+      "name": "sorghum",
+      "t_max": 3.8,
+      "s_star": 0.4,
+      "s_w": 0.17,
+      "root_depth": 1300,
+      "root_shape": [
+        1.3,
+        1.7
+      ]
+    }
+  ],
+  "rain": "rain_example.csv",
+  "cover": "cover_example.csv",
+  "options": {
+    "depth": 2000,
+    "dz": 20,
+    "s0": 0.35,
+    "storm_hours": 4,
+    "dt_max": 0.05,
+    "bottom": "free"
+  }
+}

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 520" role="img" aria-label="SoilWaterFlow logo: a water drop holding a soil profile, with a seedling and its roots">
+<defs>
+<clipPath id="drop">
+<path d="M260 34 C238 70 92 232 92 326 C92 419 167 488 260 488 C353 488 428 419 428 326 C428 232 282 70 260 34 Z"/>
+</clipPath>
+</defs>
+<rect width="520" height="520" rx="72" fill="#F6F1E6"/>
+<g clip-path="url(#drop)">
+<!-- air and rain above the surface -->
+<rect x="0" y="0" width="520" height="520" fill="#13766E"/>
+<!-- soil layers, wetter and darker with depth -->
+<path d="M0 236 Q130 222 260 236 T520 236 L520 520 L0 520 Z" fill="#DAA340"/>
+<path d="M0 306 Q130 292 260 306 T520 306 L520 520 L0 520 Z" fill="#C16E4C"/>
+<path d="M0 382 Q130 368 260 382 T520 382 L520 520 L0 520 Z" fill="#9A5338"/>
+<path d="M0 448 Q130 436 260 448 T520 448 L520 520 L0 520 Z" fill="#6E3B29"/>
+</g>
+<!-- rain -->
+<g fill="#FFF9ED">
+<path d="M246 84 c-6 10 -9 16 -9 20 a9 9 0 0 0 18 0 c0 -4 -3 -10 -9 -20 Z"/>
+<path d="M282 102 c-5 8 -7 13 -7 16 a7 7 0 0 0 14 0 c0 -3 -2 -8 -7 -16 Z"/>
+<path d="M168 196 c-6 10 -9 16 -9 20 a9 9 0 0 0 18 0 c0 -4 -3 -10 -9 -20 Z"/>
+<path d="M356 198 c-6 10 -9 16 -9 20 a9 9 0 0 0 18 0 c0 -4 -3 -10 -9 -20 Z"/>
+</g>
+<!-- seedling -->
+<g fill="#FFF9ED" stroke="#FFF9ED" stroke-linecap="round" stroke-linejoin="round">
+<path d="M260 236 L260 176" stroke-width="8" fill="none"/>
+<path d="M258 190 Q226 152 196 160 Q216 192 258 196 Z" stroke="none"/>
+<path d="M262 182 Q292 136 330 146 Q306 186 262 190 Z" stroke="none"/>
+</g>
+<!-- roots: a taproot and laterals that thin with depth -->
+<g fill="none" stroke="#FFF9ED" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#drop)">
+<path d="M260 234 C259 290 263 350 258 430" stroke-width="8"/>
+<path d="M260 262 C232 276 210 286 178 318" stroke-width="5.5"/>
+<path d="M260 270 C290 282 312 296 340 326" stroke-width="5.5"/>
+<path d="M261 322 C236 340 222 356 206 392" stroke-width="4.5"/>
+<path d="M261 330 C286 346 300 364 316 398" stroke-width="4.5"/>
+<path d="M259 390 C246 404 238 418 232 442" stroke-width="3.5"/>
+<path d="M259 396 C272 410 280 424 286 448" stroke-width="3.5"/>
+</g>
+<!-- water moving down through the profile -->
+<g fill="#FFF9ED" opacity="0.85">
+<circle cx="150" cy="352" r="7"/>
+<circle cx="372" cy="356" r="7"/>
+<circle cx="170" cy="420" r="5.5"/>
+<circle cx="352" cy="428" r="5.5"/>
+<circle cx="214" cy="468" r="4.5"/>
+<circle cx="308" cy="470" r="4.5"/>
+</g>
+</svg>
