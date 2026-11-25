@@ -81,17 +81,17 @@ Everything is in mm and days. `simulate_fields` runs many fields in parallel thr
 
 Soil water moves by the mixed form of the Richards equation,
 
-$
+$$
 \frac{\partial \theta(h)}{\partial t} = \frac{\partial}{\partial z}\left[K(h)\left(\frac{\partial h}{\partial z} - 1\right)\right] - \sum_v U_v(z, t) - E(z, t)
-$
+$$
 
 with $z$ positive downward, $h$ the pressure head, $\theta = nS$ the water content and $K = K_s k_{rel}(S)$. Retention and conductivity follow Brooks and Corey (1964), with a short linear segment between the air-entry head and saturation so that $dS/dh$ stays finite. The equation is discretized with block-centered finite differences (harmonic-mean $K_s$, upstream-weighted $k_{rel}$) and solved with the modified Picard iteration of Celia et al. (1990), which conserves mass. Time steps adapt to the number of iterations and land exactly on every change in rainfall rate. When rain exceeds the infiltration capacity the surface ponds and the excess runs off.
 
 **Root water uptake** (after Cowan 1965, as implemented by Guswa and Puma). Variety $v$ takes water from block $j$ at
 
-$
+$$
 U_{v,j} = c_v\, w_{v,j}\, \Delta z_j\, \frac{h_j - h_{p,v}}{c_{s,v} / (K_s\, k_{rel}(S_j)) + c_{r,v}}
-$
+$$
 
 - $c_v$ is the variety's canopy cover (planting share times seasonal cover); $w_{v,j}$ its root weights, a beta distribution over its root depth with mean 1.
 - The denominator is a soil resistance, which grows as the soil dries, plus a root resistance.
@@ -110,9 +110,9 @@ Neither crop has priority, and water in a shared soil block is not divided equal
 
 The total root-water sink in soil block $j$ is the sum of the individual uptake rates:
 
-$
+$$
 U_j = \sum_{v=1}^{N_v} U_{v,j}
-$
+$$
 
 In each modified Picard iteration, the solver:
 
