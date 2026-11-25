@@ -75,7 +75,7 @@ r.uptake_by_depth        # (2, n_blocks) where each variety drew its water
 r.water_balance_error()  # mm; ~1e-4 for a season
 ```
 
-Everything is in mm and days. `simulate_fields` runs many fields in parallel threads. `Variety.from_saturations` takes the relative soil moisture thresholds used in [tessera](https://github.com/mjpuma/tessera) (s\* and s_w) and converts them to heads with the soil's retention curve, so the same variety table can drive either model. Tessera turns daily actual and potential transpiration into yield (Doorenbos and Kassam 1979); `transpiration` and `transpiration_pot` are those two inputs, and tessera's [`richards.py`](https://github.com/mjpuma/tessera/blob/main/richards.py) uses this package as a drop-in replacement for its bucket soil.
+Everything is in mm and days. `simulate_fields` runs many fields in parallel threads. `Variety.from_saturations` takes the relative soil moisture thresholds used in [tessera](https://github.com/mjpuma/tessera) ($s^*$ and $s_w$) and converts them to heads with the soil's retention curve, so the same variety table can drive either model. Tessera turns daily actual and potential transpiration into yield (Doorenbos and Kassam 1979); `transpiration` and `transpiration_pot` are those two inputs, and tessera's [`richards.py`](https://github.com/mjpuma/tessera/blob/main/richards.py) uses this package as a drop-in replacement for its bucket soil.
 
 ## The model
 
@@ -110,7 +110,9 @@ Neither crop has priority, and water in a shared soil block is not divided equal
 
 The total root-water sink in soil block $j$ is the sum of the individual uptake rates:
 
-$U_j = \sum_{v=1}^{N_v} U_{v,j}.$
+```math
+U_j = \sum_{v=1}^{N_v} U_{v,j}
+```
 
 In each modified Picard iteration, the solver:
 
@@ -153,7 +155,7 @@ mkdir run && cd run && for f in ../*.IN; do cp $f $(basename $f | tr A-Z a-z); d
 
 These are reproduced so the outputs match; the field-scale interface (`soilwaterflow.model`) does not have them.
 
-1. **Convergence test.** `CNVCHK.FOR` assigns the absolute head increment to an integer before comparing it with the tolerance, so any Picard iterate whose increments are all below 1 cm counts as converged, whatever `errpr` is. The residual test is never active (`rmax` is reset to zero and never computed). The field-scale interface uses $|\Delta h| \le$ `tol` $+$ `rtol` $|h|$ in every block.
+1. **Convergence test.** `CNVCHK.FOR` assigns the absolute head increment to an integer before comparing it with the tolerance, so any Picard iterate whose increments are all below 1 cm counts as converged, whatever `errpr` is. The residual test is never active (`rmax` is reset to zero and never computed). The field-scale interface uses $|\Delta h| \le \mathrm{tol} + \mathrm{rtol}\,|h|$ in every block.
 2. **Root uptake uses the top material's $K_s$** (`rksat(1)`) in every block. This matters only for layered soils.
 3. **Runoff bookkeeping when ponded** uses the rainfall rate of the *next* boundary-condition interval on the step that ends exactly at a change in rate. The field-scale interface uses the rate actually applied and closes the water balance to about $10^{-5}$ mm.
 4. **Reading past the end of the boundary-condition arrays.** After the last boundary-condition time, `PLANT1D.FOR` reads `timet(ntopbc+1)`, which is zero, and would send the clock back to $t = 0$. The example run escapes only because rounding leaves the last print time slightly above `tmax`. The port pads the arrays with a time that is never reached.
