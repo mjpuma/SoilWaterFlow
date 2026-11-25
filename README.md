@@ -96,6 +96,31 @@ $$U_{v,j} = c_v\, w_{v,j}\, \Delta z_j\, \frac{h_j - h_{p,v}}{c_{s,v} / (K_s\, k
 
 So uptake shifts towards wetter layers as the soil dries, and each variety has its own $h_p$: varieties interact only through the water they share. With one variety at full cover this is exactly the PLANT1D uptake function.
 
+### Competition for water in crop mixtures
+
+Neither crop has priority, and water in a shared soil block is not divided equally or in fixed proportion to planting area. Each variety's uptake is calculated from the same current soil pressure head and saturation, using its own root distribution, canopy cover, hydraulic resistances, plant water potential and transpiration demand.
+
+<p align="center"><img src="assets/shared-root-uptake.svg" width="720" alt="Maize and sorghum extract water from shared upper soil layers; deeper sorghum roots also access water below the maize root zone."></p>
+
+*Conceptual illustration using the example root depths of 700 mm (maize) and 1,300 mm (sorghum). Arrows indicate possible uptake pathways, not measured fluxes or equal water shares.*
+
+The total root-water sink in soil block $j$ is the sum of the individual uptake rates:
+
+$U_j = \sum_{v=1}^{N_v} U_{v,j}.$
+
+In each modified Picard iteration, the solver:
+
+1. Computes uptake for each variety from the **same** current soil moisture profile. For each plant, uptake is first evaluated at its wilting head; if that exceeds its canopy-scaled potential transpiration, the secant method adjusts plant head to meet demand.
+2. Sums the individual uptake rates in each soil block. The soil state is not changed between variety calculations.
+3. Solves the discretized Richards equation with this combined sink, along with soil evaporation and boundary fluxes.
+4. Repeats with the updated soil state until convergence, adapting the time step as needed.
+
+See [the uptake function](src/soilwaterflow/_kernel.py#L62-L113) and [the combined sink calculation](src/soilwaterflow/_kernel.py#L336-L367). The order in which varieties are listed therefore does not confer physical priority.
+
+A 50/50 planting mixture does not necessarily have 50/50 water uptake. Greater local root density, lower hydraulic resistance, and a larger soil-to-plant head difference can increase extraction from a shared block, all else equal; deeper roots can access additional water, and a more negative wilting head can permit continued uptake under drier conditions. Actual uptake also depends on the demand constraint and the evolving soil moisture profile. As either variety extracts water, the resulting decline in soil head and conductivity feeds back on both varieties.
+
+This is a one-dimensional, horizontally averaged representation of belowground competition. It does not resolve localized depletion around individual roots or lateral separation between crop rows. Uptake is clipped at zero, so root-mediated hydraulic redistribution is excluded. A useful numerical diagnostic is to reverse the order of the varieties and the associated canopy-cover columns, then compare soil profiles and crop-specific transpiration after restoring the original output order (allowing for numerical tolerance).
+
 **Soil evaporation** is at its potential rate when the soil is wetter than `h_evap`, falling linearly to zero at residual saturation, distributed over the top `z_evap` mm. By default it is scaled by the bare-soil fraction, $1 - \sum_v c_v$.
 
 **Bottom boundary**: free drainage (unit gradient, the default), a fixed head (a water table) or a fixed flux.
