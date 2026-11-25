@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="455" viewBox="0 0 720 455" role="img" aria-labelledby="title desc">
+<title id="title">Shared soil column and crop-specific uptake</title><desc id="desc">Shallow maize roots and deeper sorghum roots draw from shared upper soil blocks; only sorghum accesses deeper blocks. Arrows are illustrative, not quantitative.</desc>
+<defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6" fill="none" stroke="#287ca5" stroke-width="1.2"/></marker></defs>
+<rect width="720" height="455" rx="8" fill="#fff"/><g font-family="Arial,sans-serif" fill="#263238">
+<text x="250" y="30" font-size="18" font-weight="bold" text-anchor="middle">Maize</text><text x="490" y="30" font-size="18" font-weight="bold" text-anchor="middle">Sorghum</text>
+<rect x="120" y="92" width="510" height="300" fill="#f2e7d7" stroke="#b5a28a"/><rect x="120" y="232" width="510" height="120" fill="#e0eaf0"/><rect x="120" y="352" width="510" height="40" fill="#eee6da"/>
+<g stroke="#b5a28a" stroke-dasharray="5 5"><path d="M120 192H630 M120 232H630 M120 292H630 M120 352H630"/></g>
+<g font-size="12" text-anchor="end"><text x="108" y="96">0</text><text x="108" y="196">500</text><text x="108" y="236">700</text><text x="108" y="296">1,000</text><text x="108" y="356">1,300</text><text x="108" y="396">1,500</text></g>
+<text x="38" y="242" font-size="13" transform="rotate(-90 38 242)" text-anchor="middle">Depth (mm)</text>
+<g fill="none" stroke="#527f47" stroke-width="5" stroke-linecap="round"><path d="M250 92V42 M250 69Q225 43 210 54Q227 75 250 74 M250 60Q276 39 289 49Q275 67 250 67"/><path d="M490 92V40 M490 70Q466 43 450 53Q469 75 490 74 M490 57Q515 35 529 47Q515 65 490 65"/></g>
+<g stroke="#947044" stroke-width="2.5" fill="none" stroke-linecap="round"><path d="M250 92Q206 143 211 217 M250 92Q262 145 248 230 M250 92Q297 150 294 211 M234 123L194 153 M259 133L310 159 M220 179L190 199 M265 178L282 219"/><path d="M490 92Q447 182 464 348 M490 92Q511 194 500 350 M490 92Q425 165 424 288 M490 92Q550 157 552 272 M463 148L412 183 M507 169L570 207 M469 242L445 302 M506 272L537 324 M482 307L473 345"/></g>
+<g stroke="#287ca5" stroke-width="2.5" marker-end="url(#arrow)" fill="none"><path d="M365 145H295"/><path d="M385 145H453"/><path d="M365 205H300"/><path d="M385 205H450"/><path d="M375 285H452"/><path d="M375 333H465"/></g>
+<g fill="#287ca5"><circle cx="375" cy="145" r="5"/><circle cx="375" cy="205" r="5"/><circle cx="375" cy="285" r="5"/><circle cx="375" cy="333" r="5"/></g>
+<g font-size="12" text-anchor="middle"><text x="375" y="119">Shared upper soil</text><text x="375" y="255">Deeper water: sorghum access only</text><text x="375" y="421">Arrows show possible uptake, not equal shares or measured fluxes.</text><text x="375" y="439">Illustrative root depths match the mixture example.</text></g></g></svg>
