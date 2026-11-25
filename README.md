@@ -10,7 +10,7 @@ The question it adds over a single-bucket soil model is *where* in the soil wate
 
 ![Maize-sorghum mixture example](examples/mixture_demo.png)
 
-*Example output (`examples/mixture_demo.py`, illustrative and uncalibrated parameters). A: in a 50/50 mixture, maize takes its water from the top 700 mm and sorghum from down to 1,300 mm. B: through a mid-season dry spell, the mixture keeps transpiring nearly as well as sorghum alone; giving sorghum maize's roots removes most of that advantage. C: in the driest quarter of 40 seasons, maize is less water-stressed in the mixture than alone, but more stressed when its neighbour roots at the same depth.*
+*Example output (`examples/mixture_demo.py`, illustrative and uncalibrated parameters). A: in a 50/50 mixture, maize takes its water from the top 700 mm and sorghum from down to 1,300 mm. B: through a mid-season dry spell, the mixture keeps transpiring nearly as well as sorghum alone; giving sorghum maize's roots removes most of that advantage. C: in the driest quarter of 40 seasons, maize is less water-stressed in the mixture than alone, but more stressed when its neighbor roots at the same depth.*
 
 ## Install
 
@@ -151,7 +151,7 @@ gfortran -ffixed-line-length-none -std=legacy -w *.FOR -o plant1d
 mkdir run && cd run && for f in ../*.IN; do cp $f $(basename $f | tr A-Z a-z); done && ../plant1d > /dev/null
 ```
 
-### Behaviour of the Fortran that the port keeps in legacy mode
+### Behavior of the Fortran that the port keeps in legacy mode
 
 These are reproduced so the outputs match; the field-scale interface (`soilwaterflow.model`) does not have them.
 
